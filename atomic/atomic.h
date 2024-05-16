@@ -33,16 +33,16 @@ namespace atomic {
 
     class Atom {
     public:
-        Atom(size_t id, size_t type, math::NumericVector &position);
-        Atom(size_t id, size_t type, math::NumericVector &position, math::NumericVector &speed);
+        Atom(size_t id, size_t type, math::NumericVector<double> &position);
+        Atom(size_t id, size_t type, math::NumericVector<double> &position, math::NumericVector<double> &speed);
         [[nodiscard]] size_t getId() const;
         [[nodiscard]] size_t getType() const;
         [[nodiscard]] AtomState exportState() const;
     private:
         size_t id;
         size_t type;
-        math::NumericVector position;
-        math::NumericVector speed;
+        math::NumericVector<double> position;
+        math::NumericVector<double> speed;
         atomic::BondMap bonds = {};
         std::vector<double> linkDistanceFactors = {};
         // TODO cluster

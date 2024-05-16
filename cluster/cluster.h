@@ -6,7 +6,7 @@
 
 namespace cluster {
     class Cluster {
-        explicit Cluster(math::NumericVector &position);
+        explicit Cluster(math::NumericVector<int> &position);
         [[nodiscard]] size_t length() const;
         void add(atomic::Atom &atom);
         void remove(atomic::Atom &atom);
@@ -14,7 +14,7 @@ namespace cluster {
 
         // TODO create iterator<Atom>
     private:
-        math::NumericVector position;
+        math::NumericVector<int> position;
         std::set<atomic::Atom*> atoms = {};
     };
 
@@ -23,7 +23,7 @@ namespace cluster {
         explicit ClusterMap(int quantum);
         explicit ClusterMap(int quantum, int phase);
     private:
-        std::map<math::NumericVector, Cluster*> storage = {};
+        std::map<math::NumericVector<int>, Cluster*> storage = {};
         int quantum;
         int phase = 0;
     };

@@ -1,7 +1,7 @@
 #include "cluster.h"
 
 namespace cluster {
-    Cluster::Cluster(math::NumericVector &position) : position(position) {}
+    Cluster::Cluster(math::NumericVector<int> &position) : position(position) {}
 
     size_t Cluster::length() const {
         return atoms.size();
