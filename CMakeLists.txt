@@ -8,4 +8,6 @@ add_executable(
     math/math.h
     math/vector.cpp
     math/helpers.cpp
+        atomic/atomic.h
+        atomic/structs.cpp
 )

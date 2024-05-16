@@ -6,7 +6,7 @@ namespace math {
         return std::round(x * std::pow(10, precision)) / std::pow(10, precision);
     }
 
-    bool is_equal(double x, double y) {
+    bool isEqual(double x, double y) {
         return round(x, 8) == round(y, 8);
     }
 }

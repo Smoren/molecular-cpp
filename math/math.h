@@ -7,7 +7,7 @@
 namespace math {
     double round(double x, int precision);
 
-    bool is_equal(double x, double y);
+    bool isEqual(double x, double y);
 
     class NumericVector : std::vector<double> {
     public:
@@ -34,8 +34,8 @@ namespace math {
         [[nodiscard]] double abs() const;
         [[nodiscard]] double abs2() const;
 
-        [[nodiscard]] bool is_normalized() const;
-        [[nodiscard]] double scalar_product(const NumericVector &other) const;
+        [[nodiscard]] bool isNormalized() const;
+        [[nodiscard]] double scalarProduct(const NumericVector &other) const;
 
         [[nodiscard]] NumericVector clone() const;
     };

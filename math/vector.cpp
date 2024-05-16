@@ -64,7 +64,7 @@ namespace math {
 
     bool NumericVector::operator==(const NumericVector &other) const {
         for (int i = 0; i < size(); ++i) {
-            if (!is_equal((*this)[i], other[i])) {
+            if (!isEqual((*this)[i], other[i])) {
                 return false;
             }
         }
@@ -111,11 +111,11 @@ namespace math {
         return *this;
     }
 
-    [[nodiscard]] bool NumericVector::is_normalized() const {
-        return is_equal(abs(), 1.0);
+    [[nodiscard]] bool NumericVector::isNormalized() const {
+        return isEqual(abs(), 1.0);
     }
 
-    [[nodiscard]] double NumericVector::scalar_product(const NumericVector &other) const {
+    [[nodiscard]] double NumericVector::scalarProduct(const NumericVector &other) const {
         auto result = 0.0;
         for (int i = 0; i < size(); ++i) {
             result += (*this)[i] * other[i];
