@@ -9,7 +9,7 @@ namespace math {
 
     bool isEqual(double x, double y);
 
-    class NumericVector : std::vector<double> {
+    class NumericVector : public std::vector<double> {
     public:
         explicit NumericVector(size_t size);
         NumericVector(std::initializer_list<double> list);

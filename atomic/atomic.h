@@ -25,6 +25,8 @@ namespace atomic {
 
     class Atom {
     public:
+        Atom(size_t id, size_t type, math::NumericVector &position);
+        Atom(size_t id, size_t type, math::NumericVector &position, math::NumericVector &speed);
         [[nodiscard]] size_t getId() const;
         [[nodiscard]] size_t getType() const;
     private:
@@ -32,6 +34,9 @@ namespace atomic {
         size_t type;
         math::NumericVector position;
         math::NumericVector speed;
+        atomic::BondMap bonds = {};
+        std::vector<double> linkDistanceFactors = {};
+        // TODO cluster
     };
 }
 

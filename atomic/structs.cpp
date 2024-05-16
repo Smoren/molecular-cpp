@@ -1,4 +1,5 @@
 #include "./atomic.h"
+#include "../math/math.h"
 
 namespace atomic {
     size_t BondMap::length() const {
@@ -27,6 +28,12 @@ namespace atomic {
         typesCount[atom.getType()]--;
         count--;
     }
+
+    Atom::Atom(size_t id, size_t type, math::NumericVector &position)
+        : id(id), type(type), position(position), speed(math::NumericVector(position.size())) {}
+
+    Atom::Atom(size_t id, size_t type, math::NumericVector &position, math::NumericVector &speed)
+        : id(id), type(type), position(position), speed(speed) {}
 
     size_t Atom::getId() const {
         return id;
