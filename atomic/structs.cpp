@@ -27,4 +27,12 @@ namespace atomic {
         typesCount[atom.getType()]--;
         count--;
     }
+
+    size_t Atom::getId() const {
+        return id;
+    }
+
+    size_t Atom::getType() const {
+        return type;
+    }
 }
