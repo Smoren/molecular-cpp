@@ -1,5 +1,5 @@
+#include <string>
 #include "./atomic.h"
-#include "../math/math.h"
 
 namespace atomic {
     size_t BondMap::length() const {
@@ -47,5 +47,27 @@ namespace atomic {
 
     size_t Atom::getType() const {
         return type;
+    }
+
+    AtomState Atom::exportState() const {
+        return { id, type, position, speed };
+    }
+
+    Link::Link(Atom& lhs, Atom& rhs) : lhs(lhs), rhs(rhs) {}
+
+    std::string Link::getId() const {
+        return std::to_string(lhs.getId()) + '-' + std::to_string(rhs.getId());
+    }
+
+    Atom& Link::getLhs() const {
+        return lhs;
+    }
+
+    Atom& Link::getRhs() const {
+        return rhs;
+    }
+
+    std::vector<size_t> Link::exportState() const {
+        return {lhs.getId(), rhs.getId()};
     }
 }

@@ -106,7 +106,7 @@ namespace math {
 
     NumericVector &NumericVector::randomize() {
         for (int i = 0; i < size(); ++i) {
-            (*this)[i] = 1 - 2.0 * ((double) random() / RAND_MAX);
+            (*this)[i] = 1 - 2.0 * (static_cast<double>(random()) / RAND_MAX);
         }
         return *this;
     }

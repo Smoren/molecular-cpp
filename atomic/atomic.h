@@ -4,10 +4,18 @@
 #include <cstdio>
 #include <map>
 #include <set>
+#include <string>
 #include "../math/math.h"
 
 namespace atomic {
     class Atom;
+
+    struct AtomState {
+        size_t id;
+        size_t type;
+        std::vector<double> position;
+        std::vector<double> speed;
+    };
 
     class BondMap {
     public:
@@ -29,6 +37,7 @@ namespace atomic {
         Atom(size_t id, size_t type, math::NumericVector &position, math::NumericVector &speed);
         [[nodiscard]] size_t getId() const;
         [[nodiscard]] size_t getType() const;
+        [[nodiscard]] AtomState exportState() const;
     private:
         size_t id;
         size_t type;
@@ -37,6 +46,18 @@ namespace atomic {
         atomic::BondMap bonds = {};
         std::vector<double> linkDistanceFactors = {};
         // TODO cluster
+    };
+
+    class Link {
+    public:
+        Link(Atom& lhs, Atom& rhs);
+        [[nodiscard]] std::string getId() const;
+        [[nodiscard]] Atom& getLhs() const;
+        [[nodiscard]] Atom& getRhs() const;
+        [[nodiscard]] std::vector<size_t> exportState() const;
+    private:
+        Atom& lhs;
+        Atom& rhs;
     };
 }
 
