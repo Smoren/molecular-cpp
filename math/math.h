@@ -18,8 +18,8 @@ namespace math {
         NumericVector operator +(const NumericVector &other) const;
         NumericVector operator -(const NumericVector &other) const;
         NumericVector operator *(T multiplier) const;
-        NumericVector operator *(const NumericVector &other) const;
         NumericVector operator /(T multiplier) const;
+        NumericVector operator *(const NumericVector &other) const;
         NumericVector operator /(const NumericVector &other) const;
 
         NumericVector& operator +=(const NumericVector &other);
