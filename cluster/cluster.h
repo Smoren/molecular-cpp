@@ -7,18 +7,21 @@
 
 namespace cluster {
     bool incPoint(math::NumericVector<int> &aPoint, math::NumericVector<int> &aCenterPoint, int aDim);
-    std::vector<math::NumericVector<int>> getNeighborhoodCoords(math::NumericVector<int> &coords);
+    std::vector<math::NumericVector<int>> getNeighboursCoords(math::NumericVector<int> &coords);
 
     class Cluster {
+    public:
         explicit Cluster(math::NumericVector<int> &position);
+
         [[nodiscard]] size_t length() const;
+        [[nodiscard]] math::NumericVector<int>& getCoords();
         void add(atomic::Atom &atom);
         void remove(atomic::Atom &atom);
         bool empty();
 
         // TODO create iterator<Atom>
     private:
-        math::NumericVector<int> position;
+        math::NumericVector<int> coords;
         std::set<atomic::Atom*> atoms = {};
     };
 
@@ -26,8 +29,15 @@ namespace cluster {
     public:
         explicit ClusterMap(int quantum);
         explicit ClusterMap(int quantum, int phase);
+
+        [[nodiscard]] std::vector<Cluster*> getNeighbourhood(atomic::Atom &atom);
+        [[nodiscard]] size_t countAtoms() const;
+        [[nodiscard]] Cluster& getCluster(math::NumericVector<int> &clusterCoords);
+        Cluster& handleAtom(atomic::Atom &atom) const;
+        void clear();
+
     private:
-        std::map<math::NumericVector<int>, Cluster*> storage = {};
+        std::map<math::NumericVector<int>, Cluster> storage = {};
         int quantum;
         int phase = 0;
     };
