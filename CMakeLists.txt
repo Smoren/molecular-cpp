@@ -11,4 +11,5 @@ add_executable(
         atomic/atomic.cpp
         cluster/cluster.h
         cluster/cluster.cpp
+        printer/printer.h
 )
