@@ -3,8 +3,12 @@
 
 #include <set>
 #include "../atomic/atomic.h"
+#include "../math/math.h"
 
 namespace cluster {
+    bool incPoint(math::NumericVector<int> &aPoint, math::NumericVector<int> &aCenterPoint, int aDim);
+    std::vector<math::NumericVector<int>> getNeighborhoodCoords(math::NumericVector<int> &coords);
+
     class Cluster {
         explicit Cluster(math::NumericVector<int> &position);
         [[nodiscard]] size_t length() const;
