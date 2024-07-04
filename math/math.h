@@ -156,7 +156,7 @@ namespace math {
 
     template <typename T> bool NumericVector<T>::operator ==(const NumericVector<T> &other) const {
         for (int i = 0; i < this->size(); ++i) {
-            if (!isEqual((*this)[i], other[i])) {
+            if (!isEqual(static_cast<double>((*this)[i]), static_cast<double>(other[i]))) {
                 return false;
             }
         }
@@ -168,11 +168,10 @@ namespace math {
     }
 
     template <typename T> bool NumericVector<T>::operator <(const NumericVector<T> &other) const {
-        if (this->size() != other.size()) {
-            return this->size() < other.size();
-        }
         for (int i = 0; i < this->size(); ++i) {
-            if ((*this)[i] < other[i]) {
+            if ((*this)[i] > other[i]) {
+                return false;
+            } else if ((*this)[i] < other[i]) {
                 return true;
             }
         }

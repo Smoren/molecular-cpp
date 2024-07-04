@@ -49,6 +49,10 @@ namespace cluster {
         return atoms.empty();
     }
 
+    bool Cluster::operator==(const Cluster &other) const {
+        return coords == other.coords;
+    }
+
     std::set<atomic::Atom*>::iterator Cluster::begin() {
         return atoms.begin();
     }
@@ -63,7 +67,7 @@ namespace cluster {
 
     std::vector<Cluster*> ClusterMap::getNeighbourhood(atomic::Atom &atom) {
         std::vector<Cluster*> result;
-        Cluster &currentCluster = handleAtom(atom);
+        Cluster &currentCluster = addAtom(atom);
         for (auto &coords : getNeighboursCoords(currentCluster.getCoords())) {
             auto &cluster = getCluster(coords);
             result.push_back(&cluster);
@@ -79,18 +83,31 @@ namespace cluster {
         return result;
     }
 
-    Cluster& ClusterMap::getCluster(math::NumericVector<int> &clusterCoords) {
+    Cluster& ClusterMap::getCluster(const math::NumericVector<int> &clusterCoords) {
         if (storage.count(clusterCoords) == 0) {
             storage.insert({clusterCoords, Cluster(clusterCoords)});
         }
+        auto a = storage.count(clusterCoords);
         return storage.at(clusterCoords);
     }
 
-    Cluster& ClusterMap::handleAtom(atomic::Atom &atom) {
+    Cluster& ClusterMap::addAtom(atomic::Atom &atom) {
         Cluster &cluster = getClusterByAtom(atom);
         cluster.add(atom);
         return cluster;
-        // TODO implement fully
+    }
+
+    Cluster& ClusterMap::handleAtom(atomic::Atom &atom, Cluster &currentCluster) {
+        Cluster &actualCluster = getClusterByAtom(atom);
+
+        if (actualCluster == currentCluster) {
+            return actualCluster;
+        }
+
+        currentCluster.remove(atom);
+        actualCluster.add(atom);
+
+        return actualCluster;
     }
 
     void ClusterMap::clear() {
@@ -114,7 +131,6 @@ namespace cluster {
     }
 
     Cluster &ClusterMap::getClusterByAtom(const atomic::Atom &atom) {
-        auto clusterCoords = getClusterCoords(atom.getPosition());
-        return getCluster(clusterCoords);
+        return getCluster(getClusterCoords(atom.getPosition()));
     }
 }

@@ -18,6 +18,7 @@ namespace cluster {
         void add(atomic::Atom &atom);
         void remove(atomic::Atom &atom);
         bool empty();
+        bool operator==(const Cluster &other) const;
         std::set<atomic::Atom*>::iterator begin();
         std::set<atomic::Atom*>::iterator end();
     private:
@@ -32,8 +33,9 @@ namespace cluster {
 
         [[nodiscard]] std::vector<Cluster*> getNeighbourhood(atomic::Atom &atom);
         [[nodiscard]] size_t countAtoms() const;
-        [[nodiscard]] Cluster& getCluster(math::NumericVector<int> &clusterCoords);
-        Cluster& handleAtom(atomic::Atom &atom);
+        [[nodiscard]] Cluster& getCluster(const math::NumericVector<int> &clusterCoords);
+        Cluster& addAtom(atomic::Atom &atom);
+        Cluster& handleAtom(atomic::Atom &atom, Cluster &currentCluster);
         void clear();
         std::map<math::NumericVector<int>, Cluster>::iterator begin();
         std::map<math::NumericVector<int>, Cluster>::iterator end();
@@ -42,7 +44,7 @@ namespace cluster {
         [[nodiscard]] math::NumericVector<int> getClusterCoords(const math::NumericVector<double> &coords) const;
         [[nodiscard]] Cluster &getClusterByAtom(const atomic::Atom &atom);
 
-        std::map<math::NumericVector<int>, Cluster> storage = {};
+        std::map<const math::NumericVector<int>, Cluster> storage = {};
         int quantum;
         int phase = 0;
     };
