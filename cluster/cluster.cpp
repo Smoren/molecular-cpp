@@ -1,7 +1,7 @@
 #include "cluster.h"
 
 namespace cluster {
-    bool incPoint(math::NumericVector<int> &aPoint, math::NumericVector<int> &aCenterPoint, int aDim) {
+    bool incPoint(math::NumericVector<int> &aPoint, math::NumericVector<int> &aCenterPoint, int aDim) { // NOLINT(*-no-recursion)
         aPoint[aDim]++;
         if (aPoint[aDim] > aCenterPoint[aDim] + 1) {
             if (aDim == aPoint.size() - 1) {
@@ -86,11 +86,35 @@ namespace cluster {
         return storage.at(clusterCoords);
     }
 
-    Cluster& ClusterMap::handleAtom(atomic::Atom &atom) const {
-        // TODO
+    Cluster& ClusterMap::handleAtom(atomic::Atom &atom) {
+        Cluster &cluster = getClusterByAtom(atom);
+        cluster.add(atom);
+        return cluster;
+        // TODO implement fully
     }
 
     void ClusterMap::clear() {
         storage.clear();
+    }
+
+    std::map<math::NumericVector<int>, Cluster>::iterator ClusterMap::begin() {
+        return storage.begin();
+    }
+
+    std::map<math::NumericVector<int>, Cluster>::iterator ClusterMap::end() {
+        return storage.end();
+    }
+
+    math::NumericVector<int> ClusterMap::getClusterCoords(const math::NumericVector<double> &coords) const {
+        math::NumericVector<int> result = math::NumericVector<int>(coords.size());
+        for (size_t i=0; i<result.size(); ++i) {
+            result[i] = static_cast<int>(coords[i]) / quantum + phase;
+        }
+        return result;
+    }
+
+    Cluster &ClusterMap::getClusterByAtom(const atomic::Atom &atom) {
+        auto clusterCoords = getClusterCoords(atom.getPosition());
+        return getCluster(clusterCoords);
     }
 }

@@ -33,10 +33,15 @@ namespace cluster {
         [[nodiscard]] std::vector<Cluster*> getNeighbourhood(atomic::Atom &atom);
         [[nodiscard]] size_t countAtoms() const;
         [[nodiscard]] Cluster& getCluster(math::NumericVector<int> &clusterCoords);
-        Cluster& handleAtom(atomic::Atom &atom) const;
+        Cluster& handleAtom(atomic::Atom &atom);
         void clear();
+        std::map<math::NumericVector<int>, Cluster>::iterator begin();
+        std::map<math::NumericVector<int>, Cluster>::iterator end();
 
     private:
+        [[nodiscard]] math::NumericVector<int> getClusterCoords(const math::NumericVector<double> &coords) const;
+        [[nodiscard]] Cluster &getClusterByAtom(const atomic::Atom &atom);
+
         std::map<math::NumericVector<int>, Cluster> storage = {};
         int quantum;
         int phase = 0;

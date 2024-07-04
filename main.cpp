@@ -16,17 +16,39 @@ int main() {
     math::NumericVector<int> coord = {1, 2, 3};
     std::cout << map[coord] << std::endl;
 
-    atomic::Atom atom1 = atomic::Atom(1, 2, {1, 2, 3});
-    atomic::Atom atom2 = atomic::Atom(2, 2, {1, 2, 3});
+    atomic::Atom atom1 = atomic::Atom(1, 1, {0, 0, 1});
+    atomic::Atom atom2 = atomic::Atom(2, 2, {0, 1, 0});
+    atomic::Atom atom3 = atomic::Atom(3, 2, {1, 1, 2});
+    atomic::Atom atom4 = atomic::Atom(4, 1, {0, 11, 0});
+    atomic::Atom atom5 = atomic::Atom(5, 2, {0, 12, 5});
+    atomic::Atom atom6 = atomic::Atom(5, 2, {0, 12, 15});
 
-    cluster::Cluster cluster = cluster::Cluster({1, 2, 3});
-    cluster.add(atom1);
-    cluster.add(atom2);
-    std::cout << cluster.length() << std::endl;
+    cluster::ClusterMap clusterMap = cluster::ClusterMap(10);
 
-    for (auto atom : cluster) {
-        std::cout << atom->getId() << std::endl;
+    clusterMap.handleAtom(atom1);
+    clusterMap.handleAtom(atom2);
+    clusterMap.handleAtom(atom3);
+    clusterMap.handleAtom(atom4);
+    clusterMap.handleAtom(atom5);
+    clusterMap.handleAtom(atom6);
+
+    for (auto& [coords, cluster] : clusterMap) {
+        std::cout << "Cluster " << coords << std::endl;
+        std::cout << "Size " << cluster.length() << std::endl;
+        for (const auto& atom : cluster) {
+            std::cout << atom->getId() << std::endl;
+        }
     }
+
+//    clusterMap.add(cluster1);
+//    clusterMap.add(cluster2);
+//
+//    auto cluster = clusterMap.getCluster({0, 0, 0});
+//    std::cout << cluster.length() << std::endl;
+//
+//    for (auto atom : cluster) {
+//        std::cout << atom->getId() << std::endl;
+//    }
 
     return 0;
 }

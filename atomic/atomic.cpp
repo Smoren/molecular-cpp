@@ -53,6 +53,14 @@ namespace atomic {
         return { id, type, position, speed };
     }
 
+    const math::NumericVector<double>& Atom::getPosition() const {
+        return position;
+    }
+
+    const math::NumericVector<double>& Atom::getSpeed() const {
+        return speed;
+    }
+
     Link::Link(Atom& lhs, Atom& rhs) : lhs(lhs), rhs(rhs) {}
 
     std::string Link::getId() const {
