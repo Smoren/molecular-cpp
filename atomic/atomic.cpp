@@ -57,6 +57,10 @@ namespace atomic {
         return position;
     }
 
+    void Atom::setPosition(const math::NumericVector<double>& value) {
+        position = value;
+    }
+
     const math::NumericVector<double>& Atom::getSpeed() const {
         return speed;
     }

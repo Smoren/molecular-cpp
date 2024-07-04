@@ -39,6 +39,7 @@ namespace atomic {
         [[nodiscard]] size_t getType() const;
         [[nodiscard]] AtomState exportState() const;
         [[nodiscard]] const math::NumericVector<double>& getPosition() const;
+        void setPosition(const math::NumericVector<double>& value);
         [[nodiscard]] const math::NumericVector<double>& getSpeed() const;
     private:
         size_t id;

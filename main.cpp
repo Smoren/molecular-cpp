@@ -39,7 +39,9 @@ int main() {
     clusterMap.addAtom(atom3);
     clusterMap.addAtom(atom4);
     clusterMap.addAtom(atom5);
-    clusterMap.addAtom(atom6);
+    auto& cl = clusterMap.addAtom(atom6);
+    atom6.setPosition({0, 0, 0});
+    clusterMap.handleAtom(atom6, cl);
 
     for (auto& [coords, cluster] : clusterMap) {
         std::cout << "Cluster " << coords << " (" << cluster.length() << ")" << std::endl;

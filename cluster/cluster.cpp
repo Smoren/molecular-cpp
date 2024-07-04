@@ -105,6 +105,11 @@ namespace cluster {
         }
 
         currentCluster.remove(atom);
+
+        if (currentCluster.empty()) {
+            storage.erase(currentCluster.getCoords());
+        }
+
         actualCluster.add(atom);
 
         return actualCluster;
