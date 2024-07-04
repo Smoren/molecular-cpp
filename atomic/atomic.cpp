@@ -29,13 +29,13 @@ namespace atomic {
         count--;
     }
 
-    Atom::Atom(size_t id, size_t type, math::NumericVector<double> &position) :
+    Atom::Atom(size_t id, size_t type, const math::NumericVector<double>& position) :
         id(id),
         type(type),
         position(position),
         speed(math::NumericVector<double>(position.size())) {}
 
-    Atom::Atom(size_t id, size_t type, math::NumericVector<double> &position, math::NumericVector<double> &speed) :
+    Atom::Atom(size_t id, size_t type, const math::NumericVector<double>& position, const math::NumericVector<double>& speed) :
         id(id),
         type(type),
         position(position),

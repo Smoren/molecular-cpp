@@ -27,7 +27,7 @@ namespace cluster {
         return result;
     }
 
-    Cluster::Cluster(math::NumericVector<int> &position) : coords(position) {}
+    Cluster::Cluster(const math::NumericVector<int> &position) : coords(position) {}
 
     size_t Cluster::length() const {
         return atoms.size();
@@ -47,6 +47,14 @@ namespace cluster {
 
     bool Cluster::empty() {
         return atoms.empty();
+    }
+
+    std::set<atomic::Atom*>::iterator Cluster::begin() {
+        return atoms.begin();
+    }
+
+    std::set<atomic::Atom*>::iterator Cluster::end() {
+        return atoms.end();
     }
 
     ClusterMap::ClusterMap(int quantum) : quantum(quantum) {}

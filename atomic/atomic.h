@@ -33,8 +33,8 @@ namespace atomic {
 
     class Atom {
     public:
-        Atom(size_t id, size_t type, math::NumericVector<double> &position);
-        Atom(size_t id, size_t type, math::NumericVector<double> &position, math::NumericVector<double> &speed);
+        Atom(size_t id, size_t type, const math::NumericVector<double>& position);
+        Atom(size_t id, size_t type, const math::NumericVector<double>& position, const math::NumericVector<double>& speed);
         [[nodiscard]] size_t getId() const;
         [[nodiscard]] size_t getType() const;
         [[nodiscard]] AtomState exportState() const;

@@ -2,6 +2,7 @@
 #include <map>
 #include "math/math.h"
 #include "printer/printer.h"
+#include "cluster/cluster.h"
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
@@ -14,6 +15,18 @@ int main() {
     std::map<math::NumericVector<int>, int> map = {{v1, 111}, {v2, 222}, {v3, 333}};
     math::NumericVector<int> coord = {1, 2, 3};
     std::cout << map[coord] << std::endl;
+
+    atomic::Atom atom1 = atomic::Atom(1, 2, {1, 2, 3});
+    atomic::Atom atom2 = atomic::Atom(2, 2, {1, 2, 3});
+
+    cluster::Cluster cluster = cluster::Cluster({1, 2, 3});
+    cluster.add(atom1);
+    cluster.add(atom2);
+    std::cout << cluster.length() << std::endl;
+
+    for (auto atom : cluster) {
+        std::cout << atom->getId() << std::endl;
+    }
 
     return 0;
 }

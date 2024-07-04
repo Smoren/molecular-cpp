@@ -11,15 +11,15 @@ namespace cluster {
 
     class Cluster {
     public:
-        explicit Cluster(math::NumericVector<int> &position);
+        explicit Cluster(const math::NumericVector<int> &position);
 
         [[nodiscard]] size_t length() const;
         [[nodiscard]] math::NumericVector<int>& getCoords();
         void add(atomic::Atom &atom);
         void remove(atomic::Atom &atom);
         bool empty();
-
-        // TODO create iterator<Atom>
+        std::set<atomic::Atom*>::iterator begin();
+        std::set<atomic::Atom*>::iterator end();
     private:
         math::NumericVector<int> coords;
         std::set<atomic::Atom*> atoms = {};
