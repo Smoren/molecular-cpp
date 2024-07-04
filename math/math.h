@@ -14,6 +14,7 @@ namespace math {
     public:
         explicit NumericVector(size_t size);
         NumericVector(std::initializer_list<T> list);
+        NumericVector(const std::vector<T> &other);
 
         NumericVector operator +(const NumericVector &other) const;
         NumericVector operator -(const NumericVector &other) const;
@@ -51,6 +52,8 @@ namespace math {
     template <typename T> NumericVector<T>::NumericVector(size_t size) : std::vector<T>(size) {}
 
     template <typename T> NumericVector<T>::NumericVector(std::initializer_list<T> list) : std::vector<T>(list) {}
+
+    template <typename T> NumericVector<T>::NumericVector(const std::vector<T> &other) : std::vector<T>(other) {}
 
     template <typename T> double NumericVector<T>::abs() const {
         return std::sqrt(abs2());

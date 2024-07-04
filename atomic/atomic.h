@@ -11,10 +11,10 @@ namespace atomic {
     class Atom;
 
     struct AtomState {
-        size_t id;
-        size_t type;
-        std::vector<double> position;
-        std::vector<double> speed;
+        const size_t id;
+        const size_t type;
+        const std::vector<double> position;
+        const std::vector<double> speed;
     };
 
     class BondMap {
@@ -35,6 +35,7 @@ namespace atomic {
     public:
         Atom(size_t id, size_t type, const math::NumericVector<double>& position);
         Atom(size_t id, size_t type, const math::NumericVector<double>& position, const math::NumericVector<double>& speed);
+        Atom(const AtomState& state);
         [[nodiscard]] size_t getId() const;
         [[nodiscard]] size_t getType() const;
         [[nodiscard]] AtomState exportState() const;

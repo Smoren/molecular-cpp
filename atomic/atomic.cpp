@@ -41,6 +41,12 @@ namespace atomic {
         position(position),
         speed(speed) {}
 
+    Atom::Atom(const AtomState& state) :
+        id(state.id),
+        type(state.type),
+        position(state.position),
+        speed(state.speed) {}
+
     size_t Atom::getId() const {
         return id;
     }
