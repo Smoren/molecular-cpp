@@ -20,8 +20,8 @@ namespace cluster {
         void remove(atomic::Atom &atom);
         [[nodiscard]] bool empty() const;
         bool operator==(const Cluster &other) const;
-        std::set<atomic::Atom*>::iterator begin();
-        std::set<atomic::Atom*>::iterator end();
+        [[nodiscard]] std::set<atomic::Atom*>::iterator begin();
+        [[nodiscard]] std::set<atomic::Atom*>::iterator end();
         [[nodiscard]] std::set<atomic::Atom*>::const_iterator begin() const;
         [[nodiscard]] std::set<atomic::Atom*>::const_iterator end() const;
     private:
@@ -42,8 +42,8 @@ namespace cluster {
         Cluster& handleAtom(atomic::Atom &atom, Cluster &currentCluster);
         void apply();
         void clear();
-        std::map<math::NumericVector<int>, Cluster>::iterator begin();
-        std::map<math::NumericVector<int>, Cluster>::iterator end();
+        [[nodiscard]] std::map<math::NumericVector<int>, Cluster>::iterator begin();
+        [[nodiscard]] std::map<math::NumericVector<int>, Cluster>::iterator end();
         [[nodiscard]] std::map<math::NumericVector<int>, Cluster>::const_iterator begin() const;
         [[nodiscard]] std::map<math::NumericVector<int>, Cluster>::const_iterator end() const;
 

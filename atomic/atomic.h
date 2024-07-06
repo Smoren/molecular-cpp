@@ -21,7 +21,7 @@ namespace atomic {
     public:
         [[nodiscard]] size_t length() const;
         [[nodiscard]] size_t lengthOf(size_t type) const;
-        bool has(Atom &atom) const;
+        [[nodiscard]] bool has(Atom &atom) const;
         void add(Atom &atom);
         void remove(Atom &atom);
 
