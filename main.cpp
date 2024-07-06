@@ -1,7 +1,7 @@
 #include <iostream>
 #include <map>
 #include "math/math.h"
-#include "printer/printer.h"
+#include "printer/base.h"
 #include "cluster/cluster.h"
 
 void printClusterMap(const cluster::ClusterMap& clusterMap) {
