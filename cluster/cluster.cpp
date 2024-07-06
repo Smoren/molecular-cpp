@@ -95,7 +95,6 @@ namespace cluster {
         if (storage.count(clusterCoords) == 0) {
             storage.insert({clusterCoords, Cluster(clusterCoords)});
         }
-        auto a = storage.count(clusterCoords);
         return storage.at(clusterCoords);
     }
 
