@@ -75,7 +75,7 @@ namespace cluster {
 
     std::vector<Cluster*> ClusterMap::getNeighbourhood(atomic::Atom &atom) {
         std::vector<Cluster*> result;
-        Cluster &currentCluster = addAtom(atom);
+        Cluster& currentCluster = getClusterByAtom(atom);
         for (auto &coords : getNeighboursCoords(currentCluster.getCoords())) {
             auto &cluster = getCluster(coords);
             result.push_back(&cluster);
