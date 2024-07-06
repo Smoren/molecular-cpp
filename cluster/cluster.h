@@ -8,17 +8,17 @@
 
 namespace cluster {
     bool incPoint(math::NumericVector<int> &aPoint, math::NumericVector<int> &aCenterPoint, int aDim);
-    std::vector<math::NumericVector<int>> getNeighboursCoords(math::NumericVector<int> &coords);
+    std::vector<math::NumericVector<int>> getNeighboursCoords(const math::NumericVector<int> &coords);
 
     class Cluster {
     public:
         explicit Cluster(const math::NumericVector<int> &position);
 
         [[nodiscard]] size_t length() const;
-        [[nodiscard]] math::NumericVector<int>& getCoords();
+        [[nodiscard]] const math::NumericVector<int>& getCoords() const;
         void add(atomic::Atom &atom);
         void remove(atomic::Atom &atom);
-        bool empty();
+        [[nodiscard]] bool empty() const;
         bool operator==(const Cluster &other) const;
         std::set<atomic::Atom*>::iterator begin();
         std::set<atomic::Atom*>::iterator end();

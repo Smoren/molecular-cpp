@@ -1,7 +1,7 @@
 #include "cluster.h"
 
 namespace cluster {
-    bool incPoint(math::NumericVector<int> &aPoint, math::NumericVector<int> &aCenterPoint, int aDim) { // NOLINT(*-no-recursion)
+    bool incPoint(math::NumericVector<int> &aPoint, const math::NumericVector<int> &aCenterPoint, int aDim) { // NOLINT(*-no-recursion)
         aPoint[aDim]++;
         if (aPoint[aDim] > aCenterPoint[aDim] + 1) {
             if (aDim == aPoint.size() - 1) {
@@ -13,7 +13,7 @@ namespace cluster {
         return true;
     }
 
-    std::vector<math::NumericVector<int>> getNeighboursCoords(math::NumericVector<int> &coords) {
+    std::vector<math::NumericVector<int>> getNeighboursCoords(const math::NumericVector<int> &coords) {
         math::NumericVector<int> curPoint = math::NumericVector<int>(coords.size());
         for (size_t i=0; i<curPoint.size(); ++i) {
             curPoint[i] = coords[i] - 1;
@@ -33,7 +33,7 @@ namespace cluster {
         return atoms.size();
     }
 
-    math::NumericVector<int>& Cluster::getCoords() {
+    const math::NumericVector<int>& Cluster::getCoords() const {
         return coords;
     }
 
@@ -45,7 +45,7 @@ namespace cluster {
         atoms.erase(&atom);
     }
 
-    bool Cluster::empty() {
+    bool Cluster::empty() const {
         return atoms.empty();
     }
 
