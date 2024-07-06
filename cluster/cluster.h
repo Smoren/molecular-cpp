@@ -7,7 +7,7 @@
 #include "../math/math.h"
 
 namespace cluster {
-    bool incPoint(math::NumericVector<int> &aPoint, math::NumericVector<int> &aCenterPoint, int aDim);
+    bool incPoint(math::NumericVector<int> &aPoint, const math::NumericVector<int> &aCenterPoint, int aDim);
     std::vector<math::NumericVector<int>> getNeighboursCoords(const math::NumericVector<int> &coords);
 
     class Cluster {
