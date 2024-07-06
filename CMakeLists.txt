@@ -12,4 +12,5 @@ add_executable(
         cluster/cluster.h
         cluster/cluster.cpp
         printer/base.h
+        printer/cluster.h
 )

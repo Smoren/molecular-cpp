@@ -1,17 +1,9 @@
 #include <iostream>
 #include <map>
 #include "math/math.h"
-#include "printer/base.h"
 #include "cluster/cluster.h"
-
-void printClusterMap(const cluster::ClusterMap& clusterMap) {
-    for (auto& [coords, cluster] : clusterMap) {
-        std::cout << "Cluster " << coords << " (" << cluster.length() << ")" << std::endl;
-        for (const auto& atom : cluster) {
-            std::cout << "\t" << atom->getPosition() << std::endl;
-        }
-    }
-}
+#include "printer/base.h"
+#include "printer/cluster.h"
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
@@ -39,15 +31,15 @@ int main() {
     clusterMap.addAtom(atom3);
     clusterMap.addAtom(atom4);
     clusterMap.addAtom(atom5);
+
     auto& cl = clusterMap.addAtom(atom6);
     atom6.setPosition({0, 0, 0});
     clusterMap.handleAtom(atom6, cl);
 
-    printClusterMap(clusterMap);
-    std::cout << "-------------------" << std::endl;
+    std::cout << clusterMap << std::endl;
 
     clusterMap.apply();
-    printClusterMap(clusterMap);
+    std::cout << clusterMap << std::endl;
 
     return 0;
 }
