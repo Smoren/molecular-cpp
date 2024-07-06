@@ -20,4 +20,14 @@ std::ostream& operator <<(std::ostream& stream, const cluster::ClusterMap& clust
     return stream;
 }
 
+std::ostream& operator <<(std::ostream& stream, const std::vector<cluster::Cluster*>& clusters) {
+    std::vector<math::NumericVector<int>> arCoords;
+    arCoords.reserve(clusters.size());
+    for (const auto& cluster : clusters) {
+        arCoords.push_back(cluster->getCoords());
+    }
+    stream << arCoords;
+    return stream;
+}
+
 #endif //MOLECULAR_PRINTER_CLUSTER_H

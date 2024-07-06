@@ -76,9 +76,10 @@ namespace cluster {
     std::vector<Cluster*> ClusterMap::getNeighbourhood(atomic::Atom &atom) {
         std::vector<Cluster*> result;
         Cluster& currentCluster = getClusterByAtom(atom);
-        for (auto &coords : getNeighboursCoords(currentCluster.getCoords())) {
-            auto &cluster = getCluster(coords);
-            result.push_back(&cluster);
+        for (math::NumericVector<int>& coords : getNeighboursCoords(currentCluster.getCoords())) {
+            if (issetCluster(coords)) {
+                result.push_back(&getCluster(coords));
+            }
         }
         return result;
     }
@@ -92,10 +93,14 @@ namespace cluster {
     }
 
     Cluster& ClusterMap::getCluster(const math::NumericVector<int> &clusterCoords) {
-        if (storage.count(clusterCoords) == 0) {
+        if (!issetCluster(clusterCoords)) {
             storage.insert({clusterCoords, Cluster(clusterCoords)});
         }
         return storage.at(clusterCoords);
+    }
+
+    bool ClusterMap::issetCluster(const math::NumericVector<int> &clusterCoords) const {
+        return storage.count(clusterCoords) > 0;
     }
 
     Cluster& ClusterMap::addAtom(atomic::Atom &atom) {

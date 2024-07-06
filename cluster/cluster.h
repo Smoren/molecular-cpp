@@ -37,6 +37,7 @@ namespace cluster {
         [[nodiscard]] std::vector<Cluster*> getNeighbourhood(atomic::Atom &atom);
         [[nodiscard]] size_t countAtoms() const;
         [[nodiscard]] Cluster& getCluster(const math::NumericVector<int> &clusterCoords);
+        [[nodiscard]] bool issetCluster(const math::NumericVector<int> &clusterCoords) const;
         Cluster& addAtom(atomic::Atom &atom);
         Cluster& handleAtom(atomic::Atom &atom, Cluster &currentCluster);
         void apply();

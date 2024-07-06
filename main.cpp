@@ -41,7 +41,7 @@ int main() {
     clusterMap.apply();
     std::cout << clusterMap << std::endl;
 
-    //std::cout << clusterMap.getNeighbourhood(atom1);
+    std::cout << clusterMap.getNeighbourhood(atom1);
 
     return 0;
 }
