@@ -4,16 +4,16 @@
 #include "printer/printer.h"
 #include "cluster/cluster.h"
 
-int main() {
-//    math::NumericVector<int> v11 = {0, 0, 1};
-//    math::NumericVector<int> v22 = {0, 0, 1};
-//
-//    std::cout << static_cast<int>(v11 < v22) << std::endl;
-//    std::cout << static_cast<int>(v22 < v11) << std::endl;
-//    std::cout << static_cast<int>(v22 == v11) << std::endl;
-//
-//    return 0;
+void printClusterMap(const cluster::ClusterMap& clusterMap) {
+    for (auto& [coords, cluster] : clusterMap) {
+        std::cout << "Cluster " << coords << " (" << cluster.length() << ")" << std::endl;
+        for (const auto& atom : cluster) {
+            std::cout << "\t" << atom->getPosition() << std::endl;
+        }
+    }
+}
 
+int main() {
     std::cout << "Hello, World!" << std::endl;
     math::NumericVector<int> v1 = {1, 2, 3};
     math::NumericVector<int> v2 = {10, 20, 30};
@@ -43,12 +43,11 @@ int main() {
     atom6.setPosition({0, 0, 0});
     clusterMap.handleAtom(atom6, cl);
 
-    for (auto& [coords, cluster] : clusterMap) {
-        std::cout << "Cluster " << coords << " (" << cluster.length() << ")" << std::endl;
-        for (const auto& atom : cluster) {
-            std::cout << "\t" << atom->getPosition() << std::endl;
-        }
-    }
+    printClusterMap(clusterMap);
+    std::cout << "-------------------" << std::endl;
+
+    clusterMap.apply();
+    printClusterMap(clusterMap);
 
     return 0;
 }

@@ -61,6 +61,14 @@ namespace cluster {
         return atoms.end();
     }
 
+    std::set<atomic::Atom*>::const_iterator Cluster::begin() const {
+        return atoms.begin();
+    }
+
+    std::set<atomic::Atom*>::const_iterator Cluster::end() const {
+        return atoms.end();
+    }
+
     ClusterMap::ClusterMap(int quantum) : quantum(quantum) {}
 
     ClusterMap::ClusterMap(int quantum, int phase) : quantum(quantum), phase(phase) {}
@@ -104,13 +112,7 @@ namespace cluster {
             return actualCluster;
         }
 
-        currentCluster.remove(atom);
-
-        if (currentCluster.empty()) {
-            storage.erase(currentCluster.getCoords());
-        }
-
-        actualCluster.add(atom);
+        moveTasks.emplace(atom, currentCluster, actualCluster);
 
         return actualCluster;
     }
@@ -119,11 +121,33 @@ namespace cluster {
         storage.clear();
     }
 
+    void ClusterMap::apply() {
+        while (!moveTasks.empty()) {
+            auto [atom, clusterFrom, clusterTo] = moveTasks.top();
+            moveTasks.pop();
+            clusterFrom.remove(atom);
+
+            if (clusterFrom.empty()) {
+                storage.erase(clusterFrom.getCoords());
+            }
+
+            clusterTo.add(atom);
+        }
+    }
+
     std::map<math::NumericVector<int>, Cluster>::iterator ClusterMap::begin() {
         return storage.begin();
     }
 
     std::map<math::NumericVector<int>, Cluster>::iterator ClusterMap::end() {
+        return storage.end();
+    }
+
+    std::map<math::NumericVector<int>, Cluster>::const_iterator ClusterMap::begin() const {
+        return storage.begin();
+    }
+
+    std::map<math::NumericVector<int>, Cluster>::const_iterator ClusterMap::end() const {
         return storage.end();
     }
 

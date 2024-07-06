@@ -2,6 +2,7 @@
 #define MOLECULAR_CLUSTER_H
 
 #include <set>
+#include <stack>
 #include "../atomic/atomic.h"
 #include "../math/math.h"
 
@@ -21,6 +22,8 @@ namespace cluster {
         bool operator==(const Cluster &other) const;
         std::set<atomic::Atom*>::iterator begin();
         std::set<atomic::Atom*>::iterator end();
+        [[nodiscard]] std::set<atomic::Atom*>::const_iterator begin() const;
+        [[nodiscard]] std::set<atomic::Atom*>::const_iterator end() const;
     private:
         math::NumericVector<int> coords;
         std::set<atomic::Atom*> atoms = {};
@@ -36,15 +39,19 @@ namespace cluster {
         [[nodiscard]] Cluster& getCluster(const math::NumericVector<int> &clusterCoords);
         Cluster& addAtom(atomic::Atom &atom);
         Cluster& handleAtom(atomic::Atom &atom, Cluster &currentCluster);
+        void apply();
         void clear();
         std::map<math::NumericVector<int>, Cluster>::iterator begin();
         std::map<math::NumericVector<int>, Cluster>::iterator end();
+        [[nodiscard]] std::map<math::NumericVector<int>, Cluster>::const_iterator begin() const;
+        [[nodiscard]] std::map<math::NumericVector<int>, Cluster>::const_iterator end() const;
 
     private:
         [[nodiscard]] math::NumericVector<int> getClusterCoords(const math::NumericVector<double> &coords) const;
         [[nodiscard]] Cluster &getClusterByAtom(const atomic::Atom &atom);
 
         std::map<const math::NumericVector<int>, Cluster> storage = {};
+        std::stack<std::tuple<atomic::Atom&, Cluster&, Cluster&>> moveTasks = {};
         int quantum;
         int phase = 0;
     };
