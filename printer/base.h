@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MOLECULAR_PRINTER_BASE_H
+#define MOLECULAR_PRINTER_BASE_H
 
 #include <iostream>
 #include <sstream>
@@ -45,7 +46,7 @@ std::string join(const Collection& collection, const std::string& delimiter) {
 
 template <typename First, typename Second>
 std::ostream& operator <<(std::ostream& stream, const std::pair<First, Second>& p) {
-    // требует подключения utility
+    // requires import "utility"
     return stream << p.first << ": " << p.second;
 }
 
@@ -68,3 +69,5 @@ template <typename Value>
 std::ostream& operator <<(std::ostream& stream, const std::deque<Value>& m) {
     return stream << "[" << join(m, ", ") << "]";
 }
+
+#endif //MOLECULAR_PRINTER_BASE_H
