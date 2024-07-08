@@ -53,6 +53,10 @@ namespace cluster {
         return coords == other.coords;
     }
 
+    bool Cluster::operator<(const Cluster &other) const {
+        return coords < other.coords;
+    }
+
     std::set<atomic::Atom*>::iterator Cluster::begin() {
         return atoms.begin();
     }

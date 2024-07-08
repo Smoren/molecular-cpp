@@ -20,6 +20,7 @@ namespace cluster {
         void remove(atomic::Atom &atom);
         [[nodiscard]] bool empty() const;
         bool operator==(const Cluster &other) const;
+        bool operator<(const Cluster &other) const;
         [[nodiscard]] std::set<atomic::Atom*>::iterator begin();
         [[nodiscard]] std::set<atomic::Atom*>::iterator end();
         [[nodiscard]] std::set<atomic::Atom*>::const_iterator begin() const;
