@@ -88,6 +88,10 @@ namespace cluster {
         return result;
     }
 
+    size_t ClusterMap::length() const {
+        return storage.size();
+    }
+
     size_t ClusterMap::countAtoms() const {
         size_t result = 0;
         for (auto &[_, cluster] : storage) {
