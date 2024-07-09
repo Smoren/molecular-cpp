@@ -39,9 +39,14 @@ namespace atomic {
         [[nodiscard]] size_t getId() const;
         [[nodiscard]] size_t getType() const;
         [[nodiscard]] AtomState exportState() const;
+        [[nodiscard]] math::NumericVector<double>& getPosition();
+        [[nodiscard]] math::NumericVector<double>& getSpeed();
         [[nodiscard]] const math::NumericVector<double>& getPosition() const;
-        void setPosition(const math::NumericVector<double>& value);
         [[nodiscard]] const math::NumericVector<double>& getSpeed() const;
+        void setPosition(const math::NumericVector<double>& value);
+        void setSpeed(const math::NumericVector<double>& value);
+        bool operator==(const Atom &other) const;
+        bool operator<(const Atom &other) const;
     private:
         size_t id;
         size_t type;
@@ -59,6 +64,8 @@ namespace atomic {
         [[nodiscard]] Atom& getLhs() const;
         [[nodiscard]] Atom& getRhs() const;
         [[nodiscard]] std::vector<size_t> exportState() const;
+        bool operator==(const Link &other) const;
+        bool operator<(const Link &other) const;
     private:
         Atom& lhs;
         Atom& rhs;

@@ -59,6 +59,10 @@ namespace atomic {
         return { id, type, position, speed };
     }
 
+    math::NumericVector<double>& Atom::getPosition() {
+        return position;
+    }
+
     const math::NumericVector<double>& Atom::getPosition() const {
         return position;
     }
@@ -67,8 +71,24 @@ namespace atomic {
         position = value;
     }
 
+    math::NumericVector<double>& Atom::getSpeed() {
+        return speed;
+    }
+
     const math::NumericVector<double>& Atom::getSpeed() const {
         return speed;
+    }
+
+    void Atom::setSpeed(const math::NumericVector<double>& value) {
+        speed = value;
+    }
+
+    bool Atom::operator==(const Atom &other) const {
+        return id == other.id;
+    }
+
+    bool Atom::operator<(const Atom &other) const {
+        return id < other.id;
     }
 
     Link::Link(Atom& lhs, Atom& rhs) : lhs(lhs), rhs(rhs) {}
@@ -87,5 +107,13 @@ namespace atomic {
 
     std::vector<size_t> Link::exportState() const {
         return {lhs.getId(), rhs.getId()};
+    }
+
+    bool Link::operator==(const Link &other) const {
+        return getId() == other.getId();
+    }
+
+    bool Link::operator<(const Link &other) const {
+        return getId() < other.getId();
     }
 }
