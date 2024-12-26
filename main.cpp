@@ -6,6 +6,29 @@
 #include "printer/cluster.h"
 
 int main() {
+    constexpr size_t atoms_count = 10000;
+    constexpr double max_distance = 100.0;
+
+    std::vector<atomic::Atom> atoms;
+    atoms.reserve(atoms_count);
+
+    auto clusterMap = cluster::ClusterMap(10);
+
+    math::NumericVector<double> coord = {0, 0, 0};
+    for (size_t i = 0; i < atoms_count; ++i) {
+        coord.randomize(max_distance);
+        auto atom = atomic::Atom(i+1, 1, coord);
+        atoms.push_back(atom);
+    }
+
+    for (auto &atom : atoms) {
+        clusterMap.addAtom(atom);
+    }
+
+    std::cout << clusterMap << std::endl;
+}
+
+int main_old() {
     std::cout << "Hello, World!" << std::endl;
     math::NumericVector<int> v1 = {1, 2, 3};
     math::NumericVector<int> v2 = {10, 20, 30};
@@ -32,7 +55,7 @@ int main() {
     clusterMap.addAtom(atom4);
     clusterMap.addAtom(atom5);
 
-    auto& cl = clusterMap.addAtom(atom6);
+    auto &cl = clusterMap.addAtom(atom6);
     atom6.setPosition({0, 0, 0});
     clusterMap.handleAtom(atom6, cl);
 

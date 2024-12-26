@@ -39,7 +39,7 @@ namespace math {
         NumericVector& inverse();
         NumericVector& zero();
         NumericVector& normalize();
-        NumericVector& randomize();
+        NumericVector& randomize(T max = 1);
 
         [[nodiscard]] double abs() const;
         [[nodiscard]] double abs2() const;
@@ -211,9 +211,9 @@ namespace math {
         return *this;
     }
 
-    template <typename T> NumericVector<T> &NumericVector<T>::randomize() {
+    template <typename T> NumericVector<T> &NumericVector<T>::randomize(T max) {
         for (int i = 0; i < this->size(); ++i) {
-            (*this)[i] = 1 - 2.0 * (static_cast<double>(random()) / RAND_MAX);
+            (*this)[i] = (1 - 2.0 * (static_cast<double>(random()) / RAND_MAX)) * max;
         }
         return *this;
     }
