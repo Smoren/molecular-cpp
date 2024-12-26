@@ -68,16 +68,16 @@ namespace math {
         return result;
     }
 
-    template <typename T> NumericVector<T> NumericVector<T>::operator +(const NumericVector<T> &other) const {
-        NumericVector<T> result(this->size());
+    template <typename T> NumericVector<T> NumericVector<T>::operator +(const NumericVector &other) const {
+        NumericVector result(this->size());
         for (int i = 0; i < this->size(); ++i) {
             result[i] = (*this)[i] + other[i];
         }
         return result;
     }
 
-    template <typename T> NumericVector<T> NumericVector<T>::operator -(const NumericVector<T> &other) const {
-        NumericVector<T> result(this->size());
+    template <typename T> NumericVector<T> NumericVector<T>::operator -(const NumericVector &other) const {
+        NumericVector result(this->size());
         for (int i = 0; i < this->size(); ++i) {
             result[i] = (*this)[i] - other[i];
         }
@@ -85,7 +85,7 @@ namespace math {
     }
 
     template <typename T> NumericVector<T> NumericVector<T>::operator *(T multiplier) const {
-        NumericVector<T> result(this->size());
+        NumericVector result(this->size());
         for (int i = 0; i < this->size(); ++i) {
             result[i] = (*this)[i] * multiplier;
         }
@@ -93,37 +93,37 @@ namespace math {
     }
 
     template <typename T> NumericVector<T> NumericVector<T>::operator /(T multiplier) const {
-        NumericVector<T> result(this->size());
+        NumericVector result(this->size());
         for (int i = 0; i < this->size(); ++i) {
             result[i] = (*this)[i] / multiplier;
         }
         return result;
     }
 
-    template <typename T> NumericVector<T> NumericVector<T>::operator *(const NumericVector<T> &other) const {
-        NumericVector<T> result(this->size());
+    template <typename T> NumericVector<T> NumericVector<T>::operator *(const NumericVector &other) const {
+        NumericVector result(this->size());
         for (int i = 0; i < this->size(); ++i) {
             result[i] = (*this)[i] * other[i];
         }
         return result;
     }
 
-    template <typename T> NumericVector<T> NumericVector<T>::operator /(const NumericVector<T> &other) const {
-        NumericVector<T> result(this->size());
+    template <typename T> NumericVector<T> NumericVector<T>::operator /(const NumericVector &other) const {
+        NumericVector result(this->size());
         for (int i = 0; i < this->size(); ++i) {
             result[i] = (*this)[i] / other[i];
         }
         return result;
     }
 
-    template <typename T> NumericVector<T> &NumericVector<T>::operator +=(const NumericVector<T> &other) {
+    template <typename T> NumericVector<T> &NumericVector<T>::operator +=(const NumericVector &other) {
         for (int i = 0; i < this->size(); ++i) {
             (*this)[i] += other[i];
         }
         return *this;
     }
 
-    template <typename T> NumericVector<T> &NumericVector<T>::operator -=(const NumericVector<T> &other) {
+    template <typename T> NumericVector<T> &NumericVector<T>::operator -=(const NumericVector &other) {
         for (int i = 0; i < this->size(); ++i) {
             (*this)[i] -= other[i];
         }
@@ -144,21 +144,21 @@ namespace math {
         return *this;
     }
 
-    template <typename T> NumericVector<T> &NumericVector<T>::operator *=(const NumericVector<T> &other) {
+    template <typename T> NumericVector<T> &NumericVector<T>::operator *=(const NumericVector &other) {
         for (int i = 0; i < this->size(); ++i) {
             (*this)[i] *= other[i];
         }
         return *this;
     }
 
-    template <typename T> NumericVector<T> &NumericVector<T>::operator /=(const NumericVector<T> &other) {
+    template <typename T> NumericVector<T> &NumericVector<T>::operator /=(const NumericVector &other) {
         for (int i = 0; i < this->size(); ++i) {
             (*this)[i] /= other[i];
         }
         return *this;
     }
 
-    template <typename T> bool NumericVector<T>::operator ==(const NumericVector<T> &other) const {
+    template <typename T> bool NumericVector<T>::operator ==(const NumericVector &other) const {
         for (int i = 0; i < this->size(); ++i) {
             if (!isEqual(static_cast<double>((*this)[i]), static_cast<double>(other[i]))) {
                 return false;
@@ -167,11 +167,11 @@ namespace math {
         return true;
     }
 
-    template <typename T> bool NumericVector<T>::operator !=(const NumericVector<T> &other) const {
+    template <typename T> bool NumericVector<T>::operator !=(const NumericVector &other) const {
         return !(*this == other);
     }
 
-    template <typename T> bool NumericVector<T>::operator <(const NumericVector<T> &other) const {
+    template <typename T> bool NumericVector<T>::operator <(const NumericVector &other) const {
         for (int i = 0; i < this->size(); ++i) {
             if ((*this)[i] > other[i]) {
                 return false;
@@ -182,7 +182,7 @@ namespace math {
         return false;
     }
 
-    template <typename T> NumericVector<T> &NumericVector<T>::operator =(const NumericVector<T> &other) {
+    template <typename T> NumericVector<T> &NumericVector<T>::operator =(const NumericVector &other) {
         for (int i = 0; i < this->size(); ++i) {
             (*this)[i] = other[i];
         }
@@ -222,7 +222,7 @@ namespace math {
         return isEqual(abs(), 1.0);
     }
 
-    template <typename T> [[nodiscard]] double NumericVector<T>::scalarProduct(const NumericVector<T> &other) const {
+    template <typename T> [[nodiscard]] double NumericVector<T>::scalarProduct(const NumericVector &other) const {
         auto result = 0.0;
         for (int i = 0; i < this->size(); ++i) {
             result += (*this)[i] * other[i];
