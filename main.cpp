@@ -17,14 +17,14 @@ int main() {
     math::NumericVector<int> coord = {1, 2, 3};
     std::cout << map[coord] << std::endl;
 
-    atomic::Atom atom1 = atomic::Atom(1, 1, {0, 0, 1});
-    atomic::Atom atom2 = atomic::Atom(2, 2, {0, 1, 0});
-    atomic::Atom atom3 = atomic::Atom(3, 2, {1, 0, 0});
-    atomic::Atom atom4 = atomic::Atom(4, 1, {0, 11, 0});
-    atomic::Atom atom5 = atomic::Atom(5, 2, {0, 12, 5});
-    atomic::Atom atom6 = atomic::Atom(5, 2, {0, 12, 15});
+    auto atom1 = atomic::Atom(1, 1, {0, 0, 1});
+    auto atom2 = atomic::Atom(2, 2, {0, 1, 0});
+    auto atom3 = atomic::Atom(3, 2, {1, 0, 0});
+    auto atom4 = atomic::Atom(4, 1, {0, 11, 0});
+    auto atom5 = atomic::Atom(5, 2, {0, 12, 5});
+    auto atom6 = atomic::Atom(5, 2, {0, 12, 15});
 
-    cluster::ClusterMap clusterMap = cluster::ClusterMap(10);
+    auto clusterMap = cluster::ClusterMap(10);
 
     clusterMap.addAtom(atom1);
     clusterMap.addAtom(atom2);

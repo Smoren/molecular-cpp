@@ -6,7 +6,7 @@ namespace atomic {
         return count;
     }
 
-    size_t BondMap::lengthOf(size_t type) const {
+    size_t BondMap::lengthOf(const size_t type) const {
         return typesCount.count(type) ? typesCount.at(type) : 0;
     }
 
@@ -29,13 +29,13 @@ namespace atomic {
         count--;
     }
 
-    Atom::Atom(size_t id, size_t type, const math::NumericVector<double>& position) :
+    Atom::Atom(const size_t id, const size_t type, const math::NumericVector<double>& position) :
         id(id),
         type(type),
         position(position),
         speed(math::NumericVector<double>(position.size())) {}
 
-    Atom::Atom(size_t id, size_t type, const math::NumericVector<double>& position, const math::NumericVector<double>& speed) :
+    Atom::Atom(const size_t id, const size_t type, const math::NumericVector<double>& position, const math::NumericVector<double>& speed) :
         id(id),
         type(type),
         position(position),
