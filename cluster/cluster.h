@@ -54,7 +54,7 @@ namespace cluster {
         [[nodiscard]] Cluster &getClusterByAtom(const atomic::Atom &atom);
 
         std::map<const math::NumericVector<int>, Cluster> storage = {};
-        std::stack<std::tuple<atomic::Atom&, Cluster&, Cluster&>> moveTasks = {};
+        std::stack<std::tuple<atomic::Atom*, Cluster*, Cluster*>> moveTasks = {};
         int quantum;
         int phase = 0;
     };

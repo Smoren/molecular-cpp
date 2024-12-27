@@ -126,7 +126,7 @@ namespace cluster {
             return actualCluster;
         }
 
-        moveTasks.emplace(atom, currentCluster, actualCluster);
+        moveTasks.emplace(&atom, &currentCluster, &actualCluster);
 
         return actualCluster;
     }
@@ -139,13 +139,13 @@ namespace cluster {
         while (!moveTasks.empty()) {
             auto [atom, clusterFrom, clusterTo] = moveTasks.top();
             moveTasks.pop();
-            clusterFrom.remove(atom);
+            clusterFrom->remove(*atom);
 
-            if (clusterFrom.empty()) {
-                storage.erase(clusterFrom.getCoords());
+            if (clusterFrom->empty()) {
+                storage.erase(clusterFrom->getCoords());
             }
 
-            clusterTo.add(atom);
+            clusterTo->add(*atom);
         }
     }
 
