@@ -25,6 +25,12 @@ int main() {
         clusterMap.addAtom(atom);
     }
 
+    for (auto& [coords, cluster] : clusterMap) {
+        for (auto& atom : cluster) {
+            auto neighbourClusters = clusterMap.getNeighbourhood(*atom);
+        }
+    }
+
     std::cout << clusterMap << std::endl;
 }
 

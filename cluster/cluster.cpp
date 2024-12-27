@@ -77,7 +77,7 @@ namespace cluster {
 
     ClusterMap::ClusterMap(int quantum, int phase) : quantum(quantum), phase(phase) {}
 
-    std::vector<Cluster*> ClusterMap::getNeighbourhood(atomic::Atom &atom) {
+    std::vector<Cluster*> ClusterMap::getNeighbourhood(const atomic::Atom &atom) {
         std::vector<Cluster*> result;
         Cluster& currentCluster = getClusterByAtom(atom);
         for (math::NumericVector<int>& coords : getNeighboursCoords(currentCluster.getCoords())) {
