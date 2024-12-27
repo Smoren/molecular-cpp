@@ -35,7 +35,7 @@ namespace cluster {
         explicit ClusterMap(int quantum);
         explicit ClusterMap(int quantum, int phase);
 
-        [[nodiscard]] std::vector<Cluster*> getNeighbourhood(const atomic::Atom &atom);
+        [[nodiscard]] std::vector<std::reference_wrapper<Cluster>> getNeighbourhood(const atomic::Atom &atom);
         [[nodiscard]] size_t length() const;
         [[nodiscard]] size_t countAtoms() const;
         [[nodiscard]] Cluster& getCluster(const math::NumericVector<int> &clusterCoords);

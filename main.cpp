@@ -1,3 +1,4 @@
+#include <functional>
 #include <iostream>
 #include <map>
 #include "math/math.h"
@@ -6,13 +7,14 @@
 #include "printer/cluster.h"
 
 int main() {
-    constexpr size_t atoms_count = 10000;
-    constexpr double max_distance = 100.0;
+    constexpr size_t atoms_count = 100;
+    constexpr double max_distance = 30.0;
+    constexpr int quantum = 10;
 
     std::vector<atomic::Atom> atoms;
     atoms.reserve(atoms_count);
 
-    auto clusterMap = cluster::ClusterMap(10);
+    auto clusterMap = cluster::ClusterMap(quantum);
 
     math::NumericVector<double> coord = {0, 0, 0};
     for (size_t i = 0; i < atoms_count; ++i) {
@@ -27,7 +29,17 @@ int main() {
 
     for (auto& [coords, cluster] : clusterMap) {
         for (auto& atom : cluster) {
+            size_t neighboursCount = 0;
             auto neighbourClusters = clusterMap.getNeighbourhood(*atom);
+            for (auto& neighbourCluster : neighbourClusters) {
+                for (auto& neighbourAtom : neighbourCluster.get()) {
+                    auto distance = (atom->getPosition() - neighbourAtom->getPosition()).abs();
+                    if (distance < quantum) {
+                        ++neighboursCount;
+                    }
+                }
+            }
+            std::cout << atom << " has " << neighboursCount << " neighbours" << std::endl;
         }
     }
 

@@ -1,5 +1,7 @@
 #include "cluster.h"
 
+#include <functional>
+
 namespace cluster {
     bool incPoint(math::NumericVector<int> &aPoint, const math::NumericVector<int> &aCenterPoint, int aDim) { // NOLINT(*-no-recursion)
         aPoint[aDim]++;
@@ -77,12 +79,12 @@ namespace cluster {
 
     ClusterMap::ClusterMap(int quantum, int phase) : quantum(quantum), phase(phase) {}
 
-    std::vector<Cluster*> ClusterMap::getNeighbourhood(const atomic::Atom &atom) {
-        std::vector<Cluster*> result;
-        Cluster& currentCluster = getClusterByAtom(atom);
+    std::vector<std::reference_wrapper<Cluster>> ClusterMap::getNeighbourhood(const atomic::Atom &atom) {
+        std::vector<std::reference_wrapper<Cluster>> result;
+        const Cluster& currentCluster = getClusterByAtom(atom);
         for (math::NumericVector<int>& coords : getNeighboursCoords(currentCluster.getCoords())) {
             if (issetCluster(coords)) {
-                result.push_back(&getCluster(coords));
+                result.emplace_back(getCluster(coords));
             }
         }
         return result;
