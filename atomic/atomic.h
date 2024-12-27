@@ -52,7 +52,7 @@ namespace atomic {
         size_t type;
         math::NumericVector<double> position;
         math::NumericVector<double> speed;
-        atomic::BondMap bonds = {};
+        BondMap bonds = {};
         std::vector<double> linkDistanceFactors = {};
         // TODO cluster
     };
